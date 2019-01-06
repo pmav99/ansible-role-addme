@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.com/pmav99/ansible-role-addme.svg?branch=master)](https://travis-ci.com/pmav99/ansible-role-addme)
+
 addme
 =========
 
@@ -13,9 +15,6 @@ Role Variables
 
 Example Playbook
 ----------------
-
-Including an example of how to use your role (for instance, with variables
-passed in as parameters) is always nice for users too:
 
     - hosts: '127.0.0.1'
       connection: 'local'
