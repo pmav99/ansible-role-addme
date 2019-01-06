@@ -69,6 +69,17 @@
     dest: '/home/{{ addme_username }}/.dotfiles'
     update: true
 
+# Stow creates a symlink at the shortest path possible.
+# E.g. it might create a symlink for: ~/.config
+# instead of: ~/.config/ipython/profile_default/<file>
+# to avoid this, we recreate the directory structure
+# https://stackoverflow.com/a/45960021/592289
+- name: 'Recreate directory structure'
+  command: 'rsync -av --include="*/" --exclude="*" {{ addme_directory }} ../'
+  args:
+    chdir: '/home/{{ addme_username }}/.dotfiles'
+  changed_when: false
+
 # Some distros (e.g. RedHat) create a default .zshrc file. We need to remove it.
 - name: 'Check if .zshrc exists.'
   stat:

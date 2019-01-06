@@ -12,3 +12,4 @@ addme_prerequisites:
   - 'git'
   - 'stow'
   - 'vim'
+  - 'rsync'
