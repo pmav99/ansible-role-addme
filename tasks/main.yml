@@ -69,13 +69,13 @@
     dest: '/home/{{ addme_username }}/.dotfiles'
     update: true
 
-# Some disros (e.g. RedHat) create a default .zshrc file. We need to remove it.
+# Some distros (e.g. RedHat) create a default .zshrc file. We need to remove it.
 - name: 'Check if .zshrc exists.'
   stat:
     path: '/home/{{ addme_username }}/.zshrc'
   register: stat_result
 
-- name: Remove .zshrc if it exists.
+- name: 'Remove .zshrc if it exists.'
   file:
     path: '/home/{{ addme_username }}/.zshrc'
     state: 'absent'
