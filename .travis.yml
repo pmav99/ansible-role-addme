@@ -1,0 +1,40 @@
+---
+sudo: required
+language: python
+services:
+  - docker
+
+env:
+  global:
+    - ROLE_NAME: addme
+    - FULL_ROLE_NAME: pmav99.addme
+  matrix:
+    - MOLECULE_DISTRO: centos:6
+    - MOLECULE_DISTRO: centos:7
+    - MOLECULE_DISTRO: fedora:28
+    - MOLECULE_DISTRO: fedora:29
+    - MOLECULE_DISTRO: ubuntu:16.04
+    - MOLECULE_DISTRO: ubuntu:18.04
+    - MOLECULE_DISTRO: debian:8
+    - MOLECULE_DISTRO: debian:9
+
+before_install:
+  - sudo apt-get -qq update
+
+install:
+  - pip install molecule
+  - pip install docker
+
+
+before_script:
+  # Use actual Ansible Galaxy role name for the project directory.
+  - cd ../
+  - ls -lah
+  - mv ansible-role-addme $FULL_ROLE_NAME
+  - cd $FULL_ROLE_NAME
+
+script:
+  - molecule test
+
+notifications:
+  webhooks: https://galaxy.ansible.com/api/v1/notifications/
