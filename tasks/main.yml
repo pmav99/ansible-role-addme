@@ -1,0 +1,97 @@
+---
+# tasks file for addme
+
+- name: 'Update apt cache'
+  apt:
+    update_cache: true
+    cache_valid_time: 600
+  when: ansible_os_family == 'Debian'
+
+- name: 'Add EPEL repository on Redhat based distros.'
+  yum_repository:
+    name: 'epel'
+    description: 'EPEL YUM repo'
+    baseurl: 'https://download.fedoraproject.org/pub/epel/$releasever/$basearch/'
+    gpgkey: 'https://dl.fedoraproject.org/pub/epel/RPM-GPG-KEY-EPEL-7'
+  when: ansible_os_family == 'RedHat'
+
+- name: 'Determine available groups'
+  getent:
+    database: 'group'
+
+- name: 'Ensure that the prerequisites are installed'
+  package:
+    state: 'present'
+    name: '{{ addme_prerequisites }}'
+  become: true
+
+- name: 'Create a user named {{ addme_username }}'
+  user:
+    createhome: true
+    name: '{{ addme_username }}'
+    # The password is generated with ` mkpasswd --method=sha-512 `
+    password: '{{ addme_password }}'
+    shell: '/bin/zsh'
+    state: 'present'
+    system: false
+
+- name: 'Ensure that {{ addme_username }} has sudo access'
+  user:
+    name: '{{ addme_username }}'
+    groups: '{{ item }}'
+    append: true
+  when: item in ansible_facts.getent_group
+  with_items:
+    - sudo    # debian based
+    - wheel   # redhat based
+
+- name: 'Add the ssh pub key from github'
+  authorized_key:
+    user: 'pmav99'
+    state: 'present'
+    key: 'https://github.com/{{ addme_github_username }}.keys'
+
+- name: 'Git clone prezto'
+  git:
+    repo: 'https://github.com/sorin-ionescu/prezto'
+    dest: '/home/{{ addme_username }}/.zprezto'
+    recursive: true
+
+- name: 'Git clone prezto-contrib'
+  git:
+    repo: 'https://github.com/belak/prezto-contrib'
+    dest: '/home/{{ addme_username }}/.zprezto/contrib'
+    recursive: true
+
+- name: 'Git clone dotfiles'
+  git:
+    repo: 'https://github.com/pmav99/newdot'
+    dest: '/home/{{ addme_username }}/.dotfiles'
+    update: true
+
+# Some disros (e.g. RedHat) create a default .zshrc file. We need to remove it.
+- name: 'Check if .zshrc exists.'
+  stat:
+    path: '/home/{{ addme_username }}/.zshrc'
+  register: stat_result
+
+- name: Remove .zshrc if it exists.
+  file:
+    path: '/home/{{ addme_username }}/.zshrc'
+    state: 'absent'
+  when: stat_result.stat.exists == true
+  changed_when: false
+
+- name: 'Install Zsh files'
+  command: 'stow zsh_remote'
+  changed_when: false
+  args:
+    chdir: '/home/{{ addme_username }}/.dotfiles'
+
+- name: 'Ensure that file permissions are correct on {{ addme_username }} home dir'
+  file:
+    dest: '/home/{{ addme_username }}/'
+    owner: '{{ addme_username }}'
+    group: '{{ addme_username }}'
+    recurse: true
+  changed_when: false

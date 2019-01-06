@@ -1,0 +1,25 @@
+---
+galaxy_info:
+  role_name: addme
+  author: Panagiotis Mavrogiorgos
+  description: Add a user account for pmav99 on linux
+  license: MIT
+  platforms:
+    - name: Ubuntu
+      versions:
+        - all
+    - name: Debian
+      versions:
+        - all
+    - name: Fedora
+      versions:
+        - all
+    - name: Centos
+      versions:
+        - all
+    - name: ArchLinux
+      versions:
+        - all
+
+
+  galaxy_tags: []
