@@ -5,6 +5,7 @@ addme_username: 'pmav99'
 addme_github_username: 'pmav99'
 # The password is generated with ` mkpasswd --method=sha-512 `
 addme_password: '$6$CE802Hcgbflxtw$L9YPYSrUtIT7NzikdKHAWtPTsZqlhi51yv/0QEpMqYWhFK95sskD8XuHnd.gsEp6MW.AjO4dfiBqPkCMYkOcN/'
+addme_directory: 'zsh_remote'
 addme_prerequisites:
   - 'sudo'
   - 'zsh'

@@ -83,7 +83,7 @@
   changed_when: false
 
 - name: 'Install Zsh files'
-  command: 'stow zsh_remote'
+  command: 'stow {{ addme_directory }}'
   changed_when: false
   args:
     chdir: '/home/{{ addme_username }}/.dotfiles'
