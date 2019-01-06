@@ -9,7 +9,7 @@ env:
     - ROLE_NAME: addme
     - FULL_ROLE_NAME: pmav99.addme
   matrix:
-    #- MOLECULE_DISTRO: centos:6   this seems to be failing for some reason, disabling for now
+    # - MOLECULE_DISTRO: centos:6   this seems to be failing for some reason, disabling for now
     - MOLECULE_DISTRO: centos:7
     - MOLECULE_DISTRO: fedora:28
     - MOLECULE_DISTRO: fedora:29
