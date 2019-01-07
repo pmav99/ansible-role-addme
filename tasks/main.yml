@@ -75,7 +75,7 @@
 # to avoid this, we recreate the directory structure
 # https://stackoverflow.com/a/45960021/592289
 - name: 'Recreate directory structure'
-  command: 'rsync -av --include="*/" --exclude="*" {{ addme_directory }} ../'
+  command: 'rsync -av --include="*/" --exclude="*" {{ addme_directory }}/ ../'
   args:
     chdir: '/home/{{ addme_username }}/.dotfiles'
   changed_when: false
