@@ -1,11 +1,17 @@
 [![Build Status](https://travis-ci.com/pmav99/ansible-role-addme.svg?branch=master)](https://travis-ci.com/pmav99/ansible-role-addme)
 
 addme
-=========
+=====
 
 This role setup a linux user account with my dotfiles etc.
 
 It shouldn't be useful to anyone else (except maybe as inspiration)
+
+Quickstart
+----------
+
+    curl https://raw.githubusercontent.com/pmav99/ansible-role-addme/master/sample_playbook.yml -o addme.yml
+    ansible-playbook addme.yml
 
 Role Variables
 --------------
