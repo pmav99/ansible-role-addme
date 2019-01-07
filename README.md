@@ -14,6 +14,13 @@ Quickstart
     curl https://raw.githubusercontent.com/pmav99/ansible-role-addme/master/sample_playbook.yml -o addme.yml
     ansible-playbook addme.yml
 
+Install the role
+----------------
+
+You can install the role by using:
+
+    ansible-galaxy install pmav99.addme
+
 Role Variables
 --------------
 
@@ -27,9 +34,9 @@ Example Playbook
       connection: 'local'
       vars:
         addme_username: 'pmav99'
+        addme_directory 'zsh_remote'
       roles:
         - role: 'pmav99.addme'
-
 
 License
 -------
