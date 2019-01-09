@@ -10,6 +10,7 @@ It shouldn't be useful to anyone else (except maybe as inspiration)
 Quickstart
 ----------
 
+    ansible-galaxy install pmav99.addme
     curl https://raw.githubusercontent.com/pmav99/ansible-role-addme/master/sample_playbook.yml -o addme.yml
     ansible-playbook addme.yml
 
