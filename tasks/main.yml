@@ -6,6 +6,7 @@
     update_cache: true
     cache_valid_time: 600
   when: ansible_os_family == 'Debian'
+  become: true
 
 - name: 'Add EPEL repository on Redhat based distros.'
   yum_repository:
@@ -14,6 +15,7 @@
     baseurl: 'https://download.fedoraproject.org/pub/epel/$releasever/$basearch/'
     gpgkey: 'https://dl.fedoraproject.org/pub/epel/RPM-GPG-KEY-EPEL-7'
   when: ansible_os_family == 'RedHat'
+  become: true
 
 - name: 'Determine available groups'
   getent:
@@ -34,6 +36,7 @@
     shell: '/bin/zsh'
     state: 'present'
     system: false
+  become: true
 
 - name: 'Ensure that {{ addme_username }} has sudo access'
   user:
@@ -44,6 +47,7 @@
   with_items:
     - sudo    # debian based
     - wheel   # redhat based
+  become: true
 
 - name: 'Add the ssh pub key from github'
   authorized_key:
@@ -108,3 +112,4 @@
     group: '{{ addme_username }}'
     recurse: true
   changed_when: false
+  become: true
