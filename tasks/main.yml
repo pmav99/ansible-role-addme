@@ -55,12 +55,14 @@
   git:
     repo: 'https://github.com/sorin-ionescu/prezto'
     dest: '/home/{{ addme_username }}/.zprezto'
+    depth: 1
     recursive: true
 
 - name: 'Git clone prezto-contrib'
   git:
     repo: 'https://github.com/belak/prezto-contrib'
     dest: '/home/{{ addme_username }}/.zprezto/contrib'
+    depth: 1
     recursive: true
 
 - name: 'Git clone dotfiles'
