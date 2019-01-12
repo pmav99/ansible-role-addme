@@ -47,7 +47,7 @@
 
 - name: 'Add the ssh pub key from github'
   authorized_key:
-    user: 'pmav99'
+    user: '{{ addme_username }}'
     state: 'present'
     key: 'https://github.com/{{ addme_github_username }}.keys'
 
