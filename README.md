@@ -12,7 +12,7 @@ Quickstart
 
     ansible-galaxy install pmav99.addme
     curl https://raw.githubusercontent.com/pmav99/ansible-role-addme/master/sample_playbook.yml -o addme.yml
-    ansible-playbook addme.yml
+    ansible-playbook addme.yml --ask-become-pass
 
 Install the role
 ----------------
