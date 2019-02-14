@@ -10,7 +10,7 @@ It shouldn't be useful to anyone else (except maybe as inspiration)
 Quickstart
 ----------
 
-    curl -Ssl https://raw.githubusercontent.com/pmav99/ansible-role-compile_grass/master/quickstart.sh | bash
+    curl -Ssl https://raw.githubusercontent.com/pmav99/ansible-role-addme/master/quickstart.sh | bash
 
 Install the role
 ----------------
