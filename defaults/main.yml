@@ -13,3 +13,4 @@ addme_prerequisites:
   - 'stow'
   - 'vim'
   - 'rsync'
+  - 'curl'
